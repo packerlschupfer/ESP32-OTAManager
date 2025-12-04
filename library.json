@@ -1,0 +1,24 @@
+{
+  "name": "ESP32-OTAManager",
+  "version": "0.1.0",
+  "description": "ESP32 OTA (Over-The-Air) update manager with WiFi/Ethernet support and thread-safe operations",
+  "keywords": ["ota", "update", "esp32", "wireless", "firmware", "arduino-ota"],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/packerlschupfer/ESP32-OTAManager.git"
+  },
+  "authors": [
+    {
+      "name": "packerlschupfer",
+      "email": "packerlschupfer@noreply.github.com",
+      "maintainer": true
+    }
+  ],
+  "homepage": "https://github.com/packerlschupfer/ESP32-OTAManager",
+  "license": "MIT",
+  "dependencies": {
+    "ESP32-MutexGuard": "https://github.com/packerlschupfer/ESP32-MutexGuard.git"
+  },
+  "frameworks": ["arduino"],
+  "platforms": ["espressif32"]
+}
