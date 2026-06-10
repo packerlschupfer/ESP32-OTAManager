@@ -15,7 +15,7 @@
     }
   ],
   "homepage": "https://github.com/packerlschupfer/ESP32-OTAManager",
-  "license": "MIT",
+  "license": "GPL-3",
   "dependencies": {
     "ESP32-MutexGuard": "https://github.com/packerlschupfer/ESP32-MutexGuard.git"
   },
