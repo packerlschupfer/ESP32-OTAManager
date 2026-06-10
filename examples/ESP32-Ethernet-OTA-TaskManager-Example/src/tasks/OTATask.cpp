@@ -3,6 +3,7 @@
 
 #include <SemaphoreGuard.h>
 #include <TaskManager.h>  // Add this include
+#include <esp_task_wdt.h>  // esp_task_wdt_reset()
 
 extern TaskManager taskManager;
 

@@ -17,8 +17,7 @@
 
 // Include external libraries
 #include <Logger.h>
-#include <LogInterface.h>       // Provides the LOG_* macros
-#include <LogInterfaceImpl.h>  // Provides the custom logger implementation
+#include <LogInterface.h>       // Provides the LOG_* macros (LogInterfaceImpl.cpp is compiled by the library)
 #include <SemaphoreGuard.h>
 #include <TaskManagerConfig.h>  // Use TaskManager config header instead of direct include
 
