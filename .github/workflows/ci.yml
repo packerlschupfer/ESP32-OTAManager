@@ -31,6 +31,13 @@ jobs:
       - name: Install PlatformIO
         run: pip install --upgrade platformio intelhex
 
+      # Pre-install the legacy core-2.x platform once so its Arduino
+      # framework package is fully populated before the per-example loop.
+      # Installing it concurrently across back-to-back `pio run` calls
+      # races and leaves FRAMEWORK_DIR=None on some envs.
+      - name: Pre-install espressif32 6.x (Arduino core 2.x)
+        run: pio pkg install -g -p "espressif32@6.12.0"
+
       - name: Compile examples
         run: |
           set -u
