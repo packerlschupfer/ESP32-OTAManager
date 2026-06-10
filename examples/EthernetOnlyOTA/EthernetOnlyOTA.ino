@@ -12,6 +12,7 @@
 #define CONFIG_WIFI_ENABLED 0
 
 #include <Arduino.h>
+#include <Network.h>   // arduino_event_id_t, Network.onEvent() (Arduino core 3.x)
 #include <ETH.h>
 #include <OTAManager.h>
 
@@ -29,7 +30,7 @@ IPAddress gateway(192, 168, 1, 1);
 IPAddress subnet(255, 255, 255, 0);
 
 // Ethernet event handler
-void onEthEvent(WiFiEvent_t event) {
+void onEthEvent(arduino_event_id_t event) {
     switch (event) {
         case ARDUINO_EVENT_ETH_START:
             Serial.println("Ethernet Started");
@@ -68,11 +69,11 @@ void setup() {
     Serial.println("WiFi is disabled in this build");
     
     // Register Ethernet event handler
-    WiFiClass::onEvent(onEthEvent);
-    
+    Network.onEvent(onEthEvent);
+
     // Start Ethernet
-    ETH.begin(ETH_PHY_ADDR, ETH_PHY_POWER, ETH_PHY_MDC, ETH_PHY_MDIO, 
-              ETH_PHY_TYPE, ETH_CLK_MODE);
+    ETH.begin((eth_phy_type_t)ETH_PHY_TYPE, ETH_PHY_ADDR, ETH_PHY_MDC, ETH_PHY_MDIO,
+              ETH_PHY_POWER, ETH_CLK_MODE);
     
     // Optional: Configure static IP
     // ETH.config(local_IP, gateway, subnet);

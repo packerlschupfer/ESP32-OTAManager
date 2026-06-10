@@ -8,7 +8,7 @@
 #include <Arduino.h>
 #include <WiFi.h>
 #include <Logger.h>            // Include Logger
-#include <LogInterfaceImpl.h>  // Include implementation
+#include <LogInterface.h>      // LOG_* macros (LogInterfaceImpl.cpp is compiled by the library)
 #include <OTAManager.h>     // Will use Logger through LogInterface
 
 // WiFi credentials
