@@ -69,6 +69,22 @@ class OTAManager {
     typedef bool (*NetworkCheckCallback)();
 
     /**
+     * @brief Enable or disable ArduinoOTA's mDNS advertisement
+     *
+     * ArduinoOTA starts mDNS by default (ArduinoOTAClass::_mdnsEnabled is true)
+     * and advertises _arduino._tcp. mDNS costs flash and holds heap for service
+     * discovery, which matters on builds that are tight on heap - OTA itself
+     * needs a 4KB contiguous allocation for Update::begin()'s write buffer, and
+     * that is the first thing to fail when heap runs short.
+     *
+     * Call this BEFORE initialize(). Disabling mDNS does not affect uploads by
+     * IP address; it only removes hostname discovery.
+     *
+     * @param enabled true to advertise over mDNS (default), false to disable
+     */
+    static void setMdnsEnabled(bool enabled);
+
+    /**
      * @brief Initialize the OTA update system
      *
      * @param hostname Optional hostname for OTA identification (defaults to OTA_HOSTNAME from
@@ -138,6 +154,9 @@ class OTAManager {
      * @param error The error code from ArduinoOTA
      */
     static void handleOTAError(const ota_error_t error);
+
+    // Whether ArduinoOTA should advertise over mDNS
+    static bool mdnsEnabled;
 
     // Whether OTA has been initialized
     static bool initialized;

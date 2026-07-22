@@ -29,6 +29,7 @@
 #endif
 
 // Initialize static members
+bool OTAManager::mdnsEnabled = true;
 bool OTAManager::initialized = false;
 OTAManager::NetworkCheckCallback OTAManager::networkCheckCallback = nullptr;
 SemaphoreHandle_t OTAManager::mutex = nullptr;
@@ -64,6 +65,10 @@ void OTAManager::initialize(const char* hostname, const char* password, uint16_t
     networkCheckCallback = networkCheckCb;
 
     // Configure ArduinoOTA
+    ArduinoOTA.setMdnsEnabled(mdnsEnabled);
+    if (!mdnsEnabled) {
+        OTAM_LOG_I("mDNS advertisement disabled - upload by IP address");
+    }
     ArduinoOTA.setHostname(hostname);
 
     if (password && strlen(password) > 0) {
@@ -274,4 +279,8 @@ void OTAManager::handleOTAProgress(unsigned int progress, unsigned int total) {
     OTAM_LOG_PROG("Bytes: %u/%u, Progress: %u%%, Speed: ~%.1f KB/s", 
                   progress, total, currentProgress, 
                   progress > 0 ? (float)progress / (millis() / 1000.0) / 1024.0 : 0);
+}
+
+void OTAManager::setMdnsEnabled(bool enabled) {
+    mdnsEnabled = enabled;
 }
